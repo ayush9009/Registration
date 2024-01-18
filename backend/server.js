@@ -51,43 +51,43 @@ mongoose.connect('mongodb+srv://aayush:root@cluster0.98y3e5b.mongodb.net/Quantum
 })
 
 // Register API
-app.post('/register', async (req, res) => {
-    try {
-        const { name, dob, email, password } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
+// app.post('/register', async (req, res) => {
+//     try {
+//         const { name, dob, email, password } = req.body;
+//         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = new User({
-            name,
-            dob,
-            email,
-            password: hashedPassword,
-        });
+//         const user = new User({
+//             name,
+//             dob,
+//             email,
+//             password: hashedPassword,
+//         });
 
-        await user.save();
+//         await user.save();
 
-        const token = jwt.sign({ userId: user._id }, 'secretKey');
-        res.json({ token, user });
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+//         const token = jwt.sign({ userId: user._id }, 'secretKey');
+//         res.json({ token, user });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
 
 // Login API
-app.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email });
+// app.post('/login', async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
+//         const user = await User.findOne({ email });
 
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).json({ error: 'Invalid credentials' });
-        }
+//         if (!user || !(await bcrypt.compare(password, user.password))) {
+//             return res.status(401).json({ error: 'Invalid credentials' });
+//         }
 
-        const token = jwt.sign({ userId: user._id }, 'secretKey');
-        res.json({ token, user });
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+//         const token = jwt.sign({ userId: user._id }, 'secretKey');
+//         res.json({ token, user });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
 
 const PORT = 5000;
 app.listen(PORT, () => {
