@@ -6,8 +6,16 @@ const cors = require('cors');
 const User = require('./models/User');
 
 const app = express();
+// app.use(express.json());
+// app.use(cors());
+app.use(cors(
+    {
+        origin:["https://register-steel.vercel.app/"],
+        methods:["POST","GET"],
+        credentials:true
+    }
+));
 app.use(express.json());
-app.use(cors());
 
 
 function generateRandomString(length) {
