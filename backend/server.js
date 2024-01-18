@@ -17,7 +17,10 @@ app.use(cors());
 // ));
 app.use(express.json());
 
-
+// get
+app.get("/",(req,res)=>{
+    res.send("<h1>Working Fine</h1>");
+)};
 function generateRandomString(length) {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let randomString = '';
